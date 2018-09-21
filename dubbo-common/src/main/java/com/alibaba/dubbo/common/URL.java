@@ -72,20 +72,31 @@ public final class URL implements Serializable {
 
     private static final long serialVersionUID = -1985165475234910535L;
 
+    /** 协议名 */
     private final String protocol;
 
+    /** 用户名 */
     private final String username;
 
+    /** 密码 */
     private final String password;
 
-    // by default, host to registry
+    /**
+     * by default, host to registry
+     * host
+     */
     private final String host;
 
-    // by default, port to registry
+    /**
+     * by default, port to registry
+     * 端口
+     */
     private final int port;
 
+    /** 路径 */
     private final String path;
 
+    /** 参数 */
     private final Map<String, String> parameters;
 
     // ==== cache ====
@@ -104,6 +115,9 @@ public final class URL implements Serializable {
 
     private volatile transient String string;
 
+    /**
+     * protocol://username:password@host:port/path?key=value&key=value ，通过 URL#buildString(...) 方法生成。
+     */
     protected URL() {
         this.protocol = null;
         this.username = null;
@@ -1153,6 +1167,17 @@ public final class URL implements Serializable {
         return buildString(appendUser, appendParameter, false, false, parameters);
     }
 
+
+    /**
+     * protocol://username:password@host:port/path?key=value&key=value ，通过 URL#buildString(...) 方法生成。
+     *
+     * @param appendUser
+     * @param appendParameter
+     * @param useIP
+     * @param useService
+     * @param parameters
+     * @return
+     */
     private String buildString(boolean appendUser, boolean appendParameter, boolean useIP, boolean useService, String... parameters) {
         StringBuilder buf = new StringBuilder();
         if (protocol != null && protocol.length() > 0) {
